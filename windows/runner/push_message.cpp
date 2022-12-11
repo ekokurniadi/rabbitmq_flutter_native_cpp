@@ -7,7 +7,7 @@
 
 void pushmessage::initialize()
 {
-    // Get data from github 
+    // Get data from github
     cpr::Response r = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
                                cpr::Authentication{"user", "pass", cpr::AuthMode::BASIC},
                                cpr::Parameters{{"anon", "true"}, {"key", "value"}});
@@ -36,15 +36,14 @@ void pushmessage::initialize()
         std::cout << "opening TCP socket" << std::endl;
     }
 
-    amqp_login(conn, 
-        "/", 
-        0, 
-        131072, 
-        0, 
-        AMQP_SASL_METHOD_PLAIN,
-        "guest", 
-        "guest",
-    );
+    amqp_login(conn,
+               "/",
+               0,
+               131072,
+               0,
+               AMQP_SASL_METHOD_PLAIN,
+               "guest",
+               "guest");
 
     amqp_channel_open(conn, 1);
     amqp_get_rpc_reply(conn);
@@ -52,12 +51,11 @@ void pushmessage::initialize()
     {
 
         amqp_queue_declare_ok_t *r = amqp_queue_declare(
-            conn, 
-            1, 
-            amqp_cstring_bytes("ini.channel.saya"), 
-            0, 1, 0, 0, 
-            amqp_empty_table,
-        );
+            conn,
+            1,
+            amqp_cstring_bytes("ini.channel.saya"),
+            0, 1, 0, 0,
+            amqp_empty_table);
 
         amqp_get_rpc_reply(conn);
 
