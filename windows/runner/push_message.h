@@ -1,0 +1,4 @@
+namespace pushmessage
+{
+    void initialize();
+}
